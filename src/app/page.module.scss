@@ -1,0 +1,107 @@
+@import "./mixins.scss";
+
+.main {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 420px) {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.page {
+  scroll-snap-align: center;
+  display: inline-flex;
+  gap: 2em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6em;
+  height: 100vh;
+  flex-basis: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+
+.home {
+  position: relative;
+
+  .name {
+    @include h1;
+    text-align: right;
+    width: min-content;
+  }
+  
+  .pages {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    a {
+      @include h4;
+      display: flex;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+
+      &:hover {
+        font-weight: 700;
+        scale: 1.2;
+        transition: scale 200ms, font-weight 200ms;
+      }
+
+      &:nth-child(1) {
+        transform: translate(0px, -20px) rotate(-30deg);
+      }
+      &:nth-child(2) {
+        transform: translate(20px, -10px) rotate(-15deg);
+      }
+      &:nth-child(3) {
+        transform: translate(30px, 0px) rotate(0);
+      }
+      &:nth-child(4) {
+        transform: translate(20px, 10px) rotate(15deg);
+      }
+      &:nth-child(5) {
+        transform: translate(0px, 20px) rotate(30deg);
+      }
+
+      .arrow {
+        margin-top: auto;
+      }
+    }
+  }
+}
+
+.about {
+  a {
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+.projects {
+
+}
+
+.about, .projects, .resume {
+  padding: 20%;
+  gap: 4em;
+  @media (max-width: 800px) {
+    padding: 10%;
+    gap: 2em;
+  }
+  @media (max-width: 420px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
