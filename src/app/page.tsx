@@ -1,24 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import Canvas from './blur/blur'
 import styles from './page.module.scss'
 import Resume from './resume/resume'
+import LinkWithArrow from './ui/ui'
 import Work from './work/work'
-
-export function LinkWithArrow({ children, href }: { children: any, href: string }) {
-  return (
-  <span className={styles.link}>
-    <a href={href} target='_blank'>{children} 
-    <Image
-      className={styles.arrow}
-      src="/arrow.svg"
-      alt="arrow"
-      width={10}
-      height={10}
-    />
-  </a></span>)
-}
 
 export default function Home() {
 

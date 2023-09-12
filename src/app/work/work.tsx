@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import styles from './work.module.scss'
-import { LinkWithArrow } from '../page'
-
+import LinkWithArrow from '../ui/ui'
 
 interface Project {
   name: string;
