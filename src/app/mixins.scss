@@ -1,21 +1,25 @@
-@mixin h1 {
-  font-family: var(--font-source-sans-pro);
+@mixin h1-mixin {
+  font-family: var(--font-source-sans);
   font-size: 2em;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
-@mixin h3 { 
+@mixin h3-mixin { 
   font-family: var(--font-roboto-mono);
   font-size: 1.25em;
   font-weight: 400;
-  color: #CCC
+  color: #CCC;
 }
 
-@mixin h4 {
+@mixin h4-mixin {
   font-family: var(--font-roboto-mono);
   font-weight: 400;
 }
 
-@mixin p { 
-  font-family: var(--font-source-sans-pro);
+@mixin p-mixin { 
+  font-size: 1em;
+  line-height: 1.5em;
+  font-family: var(--font-source-sans);
+
 }

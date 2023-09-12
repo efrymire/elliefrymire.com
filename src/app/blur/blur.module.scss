@@ -9,11 +9,13 @@
   z-index: -1;
 
   circle {
-    opacity: 0.5;
     transform-origin: 50%;
-    animation: 10s infinite clockwise;
+    animation: 6s infinite clockwise;
 
-    &:first-of-type, &:last-of-type {
+    &:first-of-type {
+      animation: 6s 2s/ infinite linear counter-clockwise;
+    }
+    &:last-of-type {
       animation: 10s infinite linear counter-clockwise;
     }
   }
