@@ -49,6 +49,11 @@
         padding: 0.75em 1em;
       }
     }
+
+    @media (max-width: 420px) {
+      height: auto;
+      min-width: 85%;
+    }
   }
 
   .scrollBlur {
@@ -59,7 +64,7 @@
     background-image: linear-gradient(to right, rgba(255,0,0,0), #ffffff);
 
     @media (max-width: 420px) {
-      min-width: 10px;
+      min-width: 20px;
       right: -5px;
     }
   }
@@ -70,10 +75,5 @@
   @media (max-width: 420px) {
     font-size: 0.75em;
     padding: 0.5em;
-
-    .projectTile {
-      height: auto;
-      width: 75%;
-    }
   }
 }
