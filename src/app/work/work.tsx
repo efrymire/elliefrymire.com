@@ -82,7 +82,7 @@ function ProjectTile({ data }: { data: Project }) {
         width={data.thumbnail.size[0]}
         height={data.thumbnail.size[1]}
       /></a>}
-      {data.links.map(d => <a className={styles.button} href={d.src}>
+      {data.links.map(d => <a className={styles.button} href={d.src} key={d.src}>
         <LinkWithArrow href={d.src}>{d.label}</LinkWithArrow>
       </a>)}
     </div>
@@ -93,7 +93,8 @@ export default function Work() {
   return (<>
     <h1>Work</h1>
     <div className={styles.projectsMarquee}>
-      {projects.map(p => <ProjectTile data={p} />)}
+      {projects.map(p => <ProjectTile data={p} key={p.name}/>)}
+      <div className={styles.scrollBlur}></div>
     </div>
   </>)
 }

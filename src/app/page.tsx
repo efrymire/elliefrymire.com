@@ -1,19 +1,31 @@
 'use client'
 
+import Image from 'next/image'
 import Canvas from './blur/blur'
 import styles from './page.module.scss'
 import Resume from './resume/resume'
 import LinkWithArrow from './ui/ui'
 import Work from './work/work'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export default function Home() {
+  const main = useRef<HTMLDivElement>(null)
 
   const scroll = (id:string) => {
     const el = document.getElementById(id)
     el?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const previous = useCallback(() => {
+    if (main.current) main.current.scrollBy({ left: -100, behavior: 'smooth' })
+  }, [main])
+
+  const next = useCallback(() => {
+    if (main.current) main.current.scrollBy({ left: 100, behavior: 'smooth' })
+  }, [main])
+
   return (<>    
-    <main className={styles.main}>
+    <main className={styles.main} id="main" ref={main}>
 
       <div className={`${styles.page} ${styles.home}`}>
         <Canvas/>
@@ -51,5 +63,23 @@ export default function Home() {
       </div>
 
     </main>
+    <nav className={styles.nav}>
+      <span className={styles.next}><a onClick={next}>
+        <Image
+            src="/right-arrow.svg"
+            alt='next'
+            width={20}
+            height={20}
+          />
+        </a></span>
+      <span className={styles.previous}><a onClick={previous}>
+        <Image
+          src="/left-arrow.svg"
+          alt='next'
+          width={20}
+          height={20}
+        />
+        </a></span>
+    </nav>
   </>)
 }

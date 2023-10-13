@@ -17,6 +17,25 @@
   }
 }
 
+.nav {
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+
+  .previous {
+    position: fixed;
+    left: 2%;
+    top: 50%;
+  }
+
+  .next {
+    position: fixed;
+    right: 2%;
+    top: 50%;
+  }
+}
+
 .page {
   scroll-snap-align: start;
   display: inline-flex;
@@ -26,6 +45,10 @@
   flex-basis: 100%;
   flex-grow: 0;
   flex-shrink: 0;
+  @media (max-height: 800px) {
+    gap: 1em;
+    padding: 3em 6em;
+  }
 
   h1 {
     @include h1-mixin;
@@ -98,11 +121,11 @@
 .work {
   flex-direction: column;
   gap: 4em;
-  width: fit-content;
-  padding-right: 50%;
+  width: 100%;
   margin: auto;
-  height: 100%;
-
+  @media (max-height: 800px) {
+    gap: 0em;
+  }
 }
 
 .about, .work, .resume {

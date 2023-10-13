@@ -1,7 +1,9 @@
 
 .projectsMarquee {
+  position: relative;
   display: inline-flex;
-  gap: 4em;
+  gap: 2em;
+  overflow-x: scroll;
 
   .projectTile {
     display: flex;
@@ -9,9 +11,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em 2em;
-    width: 400px;
+    min-width: 400px;
     border: 1px solid #eee;
     box-shadow: 0px 0px 10px #EEE;
+    overflow-y: scroll;
 
     div {
       display: flex;
@@ -23,17 +26,38 @@
     .thumbnail { 
       border-radius: 2px;
       object-fit: contain;
-      // border: 1px solid #EEE;
+      width: 100%;
     }
 
     .button {
       padding: 1em 2em;
       font-size: 1em;
-      // background-color: #EEE;
-      border: 1px solid #eee;
+      // background-color: #f1f1ff;
+      border: 1px solid #EEE;
       box-shadow: 0px 0px 10px #EEE;
       border-radius: 2px;
       margin: 1em 0em;
     }
+
+    @media (max-width: 1200px) {
+      min-width: 300px;
+      padding: 0.75em 1.5em;
+
+      .button {
+        padding: 0.75em 1em;
+      }
+    }
+  }
+
+  .scrollBlur {
+    position: sticky;
+    right: 0px;
+    min-width: 100px;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), #ffffff);
+  }
+
+  @media (max-width: 1200px) {
+    gap: 1em;
   }
 }
