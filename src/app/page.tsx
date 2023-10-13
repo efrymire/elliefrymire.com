@@ -111,7 +111,7 @@ export default function Home() {
 
     </main>
     <nav className={styles.nav}>
-      {page !== "home" && <span className={styles.previous}><a onClick={previous}>
+      <span className={`${styles.previous} ${page === 'home' ? styles.hide : null}`}><a onClick={previous}>
         <Image
           src="/left-arrow.svg"
           alt='next'
@@ -119,15 +119,15 @@ export default function Home() {
           height={20}
         />
         </a>
-      </span>}
-      {(page !== "home" && page !== "resume") && <span className={styles.next}><a onClick={next}>
+      </span>
+      <span className={`${styles.next}  ${page === 'home' || page === "resume" ? styles.hide : null}`}><a onClick={next}>
         <Image
             src="/right-arrow.svg"
             alt='next'
             width={20}
             height={20}
           />
-        </a></span>}
+        </a></span>
     </nav>
   </>)
 }

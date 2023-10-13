@@ -27,11 +27,13 @@
       border-radius: 2px;
       object-fit: contain;
       width: 100%;
+      height: "auto";
     }
 
     .button {
+      display: inline-flex;
+      align-items: center;
       padding: 1em 2em;
-      font-size: 1em;
       // background-color: #f1f1ff;
       border: 1px solid #EEE;
       box-shadow: 0px 0px 10px #EEE;
@@ -55,9 +57,23 @@
     min-width: 100px;
     height: 100%;
     background-image: linear-gradient(to right, rgba(255,0,0,0), #ffffff);
+
+    @media (max-width: 420px) {
+      min-width: 10px;
+      right: -5px;
+    }
   }
 
   @media (max-width: 1200px) {
     gap: 1em;
+  }
+  @media (max-width: 420px) {
+    font-size: 0.75em;
+    padding: 0.5em;
+
+    .projectTile {
+      height: auto;
+      width: 75%;
+    }
   }
 }

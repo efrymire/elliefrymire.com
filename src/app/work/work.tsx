@@ -83,7 +83,14 @@ function ProjectTile({ data }: { data: Project }) {
         height={data.thumbnail.size[1]}
       /></a>}
       {data.links.map(d => <a className={styles.button} href={d.src} key={d.src}>
-        <LinkWithArrow href={d.src}>{d.label}</LinkWithArrow>
+        <div>{d.label}</div>
+        <Image
+          className={styles.arrow}
+          src="/arrow.svg"
+          alt="arrow"
+          width={10}
+          height={10}
+        />
       </a>)}
     </div>
   </div>)
