@@ -1,21 +1,80 @@
 'use client'
 
+import Image from 'next/image'
 import Canvas from './blur/blur'
 import styles from './page.module.scss'
 import Resume from './resume/resume'
 import LinkWithArrow from './ui/ui'
 import Work from './work/work'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+const pages = [
+  "home", 
+  "about",
+  "work",
+  "resume"
+]
 
 export default function Home() {
+  const [page, setPage] = useState(pages[0])
+  const main = useRef<HTMLDivElement>(null)
 
   const scroll = (id:string) => {
     const el = document.getElementById(id)
     el?.scrollIntoView({ behavior: "smooth" });
   };
-  return (<>    
-    <main className={styles.main}>
 
-      <div className={`${styles.page} ${styles.home}`}>
+  const previous = useCallback(() => {
+    const prev = pages[pages.indexOf(page) - 1]
+    const el = document.getElementById(prev)
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [page, main])
+
+  const next = useCallback(() => {
+    const next = pages[pages.indexOf(page) + 1]
+    const el = document.getElementById(next)
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [page, main])
+
+  const options = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.9,
+  };
+
+  const handleIntersection = (entries: any) => {
+    entries.forEach((entry: any) => {
+      if (entry.isIntersecting) {
+        setPage(entry.target.id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    let observerRefValue: any = null;
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+    const subItems = document.querySelectorAll(`.${styles.page}`);
+
+    subItems.forEach((subItem) => {
+      observer.observe(subItem);
+    });
+
+    if (main.current) {
+      observerRefValue = main.current;
+    }
+
+    return () => {
+      if (observerRefValue) observer.unobserve(observerRefValue);
+    };
+
+  }, [handleIntersection, options]);
+
+
+  return (<>    
+    <main className={styles.main} id="main" ref={main}>
+
+      <div className={`${styles.page} ${styles.home}`} id="home">
         <Canvas/>
         <div className={styles.name}>
           ELLIE FRYMIRE
@@ -51,5 +110,24 @@ export default function Home() {
       </div>
 
     </main>
+    <nav className={styles.nav}>
+      <span className={`${styles.previous} ${page === 'home' ? styles.hide : null}`}><a onClick={previous}>
+        <Image
+          src="/left-arrow.svg"
+          alt='next'
+          width={20}
+          height={20}
+        />
+        </a>
+      </span>
+      <span className={`${styles.next}  ${page === 'home' || page === "resume" ? styles.hide : null}`}><a onClick={next}>
+        <Image
+            src="/right-arrow.svg"
+            alt='next'
+            width={20}
+            height={20}
+          />
+        </a></span>
+    </nav>
   </>)
 }

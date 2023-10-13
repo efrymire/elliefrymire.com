@@ -10,7 +10,6 @@ export default function Resume() {
 
   useEffect(() => {
     if (container.current) {
-      console.log(container.current?.clientWidth)
       setWidth(container.current?.clientWidth)
       setHeight(container.current?.clientHeight)
     }
