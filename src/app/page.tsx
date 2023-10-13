@@ -25,12 +25,16 @@ export default function Home() {
   };
 
   const previous = useCallback(() => {
-    if (main.current) main.current.scrollBy({ left: -100, behavior: 'smooth' })
-  }, [main])
+    const prev = pages[pages.indexOf(page) - 1]
+    const el = document.getElementById(prev)
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [page, main])
 
   const next = useCallback(() => {
-    if (main.current) main.current.scrollBy({ left: 100, behavior: 'smooth' })
-  }, [main])
+    const next = pages[pages.indexOf(page) + 1]
+    const el = document.getElementById(next)
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [page, main])
 
   const options = {
     root: null, 
