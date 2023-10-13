@@ -8,7 +8,15 @@ import LinkWithArrow from './ui/ui'
 import Work from './work/work'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+const pages = [
+  "home", 
+  "about",
+  "work",
+  "resume"
+]
+
 export default function Home() {
+  const [page, setPage] = useState(pages[0])
   const main = useRef<HTMLDivElement>(null)
 
   const scroll = (id:string) => {
@@ -24,10 +32,45 @@ export default function Home() {
     if (main.current) main.current.scrollBy({ left: 100, behavior: 'smooth' })
   }, [main])
 
+  const options = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.9,
+  };
+
+  const handleIntersection = (entries: any) => {
+    entries.forEach((entry: any) => {
+      if (entry.isIntersecting) {
+        setPage(entry.target.id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    let observerRefValue: any = null;
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+    const subItems = document.querySelectorAll(`.${styles.page}`);
+
+    subItems.forEach((subItem) => {
+      observer.observe(subItem);
+    });
+
+    if (main.current) {
+      observerRefValue = main.current;
+    }
+
+    return () => {
+      if (observerRefValue) observer.unobserve(observerRefValue);
+    };
+
+  }, [handleIntersection, options]);
+
+
   return (<>    
     <main className={styles.main} id="main" ref={main}>
 
-      <div className={`${styles.page} ${styles.home}`}>
+      <div className={`${styles.page} ${styles.home}`} id="home">
         <Canvas/>
         <div className={styles.name}>
           ELLIE FRYMIRE
@@ -64,22 +107,23 @@ export default function Home() {
 
     </main>
     <nav className={styles.nav}>
-      <span className={styles.next}><a onClick={next}>
-        <Image
-            src="/right-arrow.svg"
-            alt='next'
-            width={20}
-            height={20}
-          />
-        </a></span>
-      <span className={styles.previous}><a onClick={previous}>
+      {page !== "home" && <span className={styles.previous}><a onClick={previous}>
         <Image
           src="/left-arrow.svg"
           alt='next'
           width={20}
           height={20}
         />
-        </a></span>
+        </a>
+      </span>}
+      {(page !== "home" && page !== "resume") && <span className={styles.next}><a onClick={next}>
+        <Image
+            src="/right-arrow.svg"
+            alt='next'
+            width={20}
+            height={20}
+          />
+        </a></span>}
     </nav>
   </>)
 }
