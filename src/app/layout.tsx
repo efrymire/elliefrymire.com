@@ -2,7 +2,7 @@ import './globals.scss'
 import type { Metadata } from 'next'
 import { Inter, Source_Sans_3, Roboto_Mono } from 'next/font/google'
 
-// const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
