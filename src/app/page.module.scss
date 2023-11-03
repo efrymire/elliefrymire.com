@@ -57,6 +57,11 @@
     gap: 1em;
     padding: 3em 6em;
   }
+  @media (max-width: 420px) {
+    // flex-direction: column;
+    height: auto;
+    scroll-snap-align: none;
+  }
 
   h1 {
     @include h1-mixin;
