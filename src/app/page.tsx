@@ -91,7 +91,7 @@ export default function Home() {
       <div className={`${styles.page} ${styles.about}`} id="about">
         <h1 >About</h1>
         <p>
-          Driven and accomplished designer and developer living in San Francisco, California.
+          Driven and accomplished data visualization developer living in San Francisco, California.
           <br/><br/>
           I have a strong business and client background, with startup experience working on mission critical products. 
           I like to think I am both a passionate creative and an analytical thinker. 
