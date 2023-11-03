@@ -113,7 +113,7 @@ function ProjectTile({ data }: { data: Project }) {
               <Thumbnail projectName={data.name} thumbnail={data.thumbnail}/>
             </a> 
           : <Thumbnail projectName={data.name} thumbnail={data.thumbnail}/>
-        : <div className={styles.placeholder}></div>}
+        : null}
       </div>
     </div>
       {showMore &&
@@ -125,6 +125,7 @@ function ProjectTile({ data }: { data: Project }) {
             width={more.size[0]}
             height={more.size[1]}
           />)}
+          {/* <div className={styles.scrollBlur}></div> */}
         </div>
       }
   </div>)
@@ -145,7 +146,6 @@ export default function Work() {
     <h1>Work</h1>
     <div className={styles.projectsMarquee}>
       {projects.map(p => <ProjectTile data={p} key={p.name}/>)}
-      {/* <div className={styles.scrollBlur}></div> */}
     </div>
   </div>)
 }

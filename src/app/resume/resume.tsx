@@ -13,7 +13,7 @@ export default function Resume() {
       setWidth(container.current?.clientWidth)
       setHeight(container.current?.clientHeight)
     }
-  })
+  }, [])
 
   return (<div className={styles.container} ref={container}>
       <object 
