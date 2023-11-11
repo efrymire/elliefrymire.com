@@ -20,7 +20,7 @@ export default function Resume() {
         className={styles.resume} 
         width={width}
         height={height}
-        type="application/pdf" data="/Ellie_Frymire_Resume_20231024.pdf"
+        type="application/pdf" data="/EllieFrymire_Resume_Nov2023.pdf"
         ></object>
     </div>)
 }
