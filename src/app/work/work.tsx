@@ -12,7 +12,7 @@ interface Thumbnail {
 interface Project {
   name: string;
   description: JSX.Element;
-  showMore?: ({ caption: string } & Thumbnail)[];
+  showMore?: ({ caption: string, link?: string } & Thumbnail)[];
   thumbnail?: Thumbnail;
   links?: {
       label: string;
@@ -65,8 +65,10 @@ const projects: Project[] = [
   { 
     name: "Projects at Two-N",
     description: <p>I worked on a number of impactful projects during my time at Two-N. To name a few, I was a primary developer for the
-      <LinkWithArrow href="https://two-n.com/projects/nbc-elections-map">NBC Elections Map</LinkWithArrow>,
-      <LinkWithArrow href="https://two-n.com/projects/meaningful-rating-point-tool">MRP Tool</LinkWithArrow>, and 
+      <LinkWithArrow href="https://two-n.com/projects/nbc-elections-map">NBC Elections Map</LinkWithArrow>, 
+      <LinkWithArrow href="https://two-n.com/projects/meaningful-rating-point-tool">MRP Tool</LinkWithArrow>,  
+      <LinkWithArrow href="https://www.evvy.com/sample-report">Evvy's Data Reports</LinkWithArrow>, 
+      and 
       <LinkWithArrow href="https://two-n.com/projects/level-etf">Level ETF's fund lookthrough</LinkWithArrow>. 
       I contributed directly with NBC graphics during the elections cycle, which resulted in a few <LinkWithArrow href="https://muckrack.com/ellie-frymire">bylines</LinkWithArrow>. 
       Some projects are not featured due to client restrictions, but I also worked on a financial services reporting tool, a marketing data exploration project, a map assisting food donations, and many more.
@@ -74,15 +76,21 @@ const projects: Project[] = [
     thumbnail: { src: "/nbc.png", size: [250, 150], shadow: true },
     links: [
       { label: "Learn more about Two-N's projects", src: "https://two-n.com/" }
-    ]
+    ],
+    showMore: [
+      { caption: "NBC Map", src: "/2n-nbc.gif", size: [300, 200], shadow: true, link: 'https://www.youtube.com/watch?v=ZFh81WiBuos' },
+      { caption: "Havas MRP Tool", src: "/2n-mrp.gif", size: [280, 180], shadow: true, link: 'https://vimeo.com/412413723' },
+      { caption: "Evvy sample report", src: "/2n-evvy-report.png", size: [200, 200], shadow: true, link: 'https://www.evvy.com/sample-report' },
+      { caption: "Level ETF Explorer", src: "/2n-level-etf.gif", size: [300, 200], shadow: true, link: 'https://two-n.com/projects/level-etf' },
+    ],
   }, 
   { 
     name: "#metoo",
     description: <p>For my final thesis while pursuing my Masters in Data Visualization, I scraped nearly 1.4 million tweets from the public twitter search page to analyze the language within. Using kmeans cluster analysis, I find themes in the tweets and seek to answer the question: "what are people really saying about #metoo?" This thesis took me all over the world — I spoke about it at Antenna during Dutch Design Week, the Design Indaba Conference in Cape Town, as a lightning talk at Eyeo Festival in Minneapolis, and as a d3.js meet up talk.</p>,
     thumbnail: { src: "/clusters.png", size: [100,100], shadow: false},
     links: [
+      { label: "Watch the video", src: "https://www.youtube.com/watch?v=0xd5JNASIE4"},
       { label: "Explore the project", src: "https://efrymire.github.io/thesis/index.html" },
-      { label: "Watch the video", src: "https://www.youtube.com/watch?v=0xd5JNASIE4"}
     ]
   }
 ]
@@ -110,32 +118,32 @@ function ProjectTile({ data }: { data: Project }) {
       {data.thumbnail 
         ? data.links 
           ? <a href={data.links[0].src}>
-              <Thumbnail projectName={data.name} thumbnail={data.thumbnail}/>
+              <Thumbnail alt={`image for ${data.name} project`} thumbnail={data.thumbnail}/>
             </a> 
-          : <Thumbnail projectName={data.name} thumbnail={data.thumbnail}/>
+          : <Thumbnail alt={`image for ${data.name} project`} thumbnail={data.thumbnail}/>
         : null}
       </div>
     </div>
       {showMore &&
         <div className={styles.showMore}>
-          {data.showMore && data.showMore.map(more => <Image
-            className={`${more.shadow && styles.shadow}`}
-            src={more.src}
-            alt={more.caption}
-            width={more.size[0]}
-            height={more.size[1]}
-          />)}
+          {data.showMore && data.showMore.map(more => {
+            return more.link 
+              ? <a href={more.link}>
+                  <Thumbnail alt={more.caption} thumbnail={more} />
+                </a>
+              : <Thumbnail alt={more.caption} thumbnail={more} /> 
+          })}
           {/* <div className={styles.scrollBlur}></div> */}
         </div>
       }
   </div>)
 }
 
-export function Thumbnail({ projectName, thumbnail } : { projectName: string, thumbnail: Thumbnail}) {
+export function Thumbnail({ alt, thumbnail } : { alt: string, thumbnail: Thumbnail}) {
   return <Image
     className={`${styles.thumbnail} ${thumbnail.shadow && styles.shadow}`}
     src={thumbnail.src}
-    alt={`image for ${projectName} project`}
+    alt={alt}
     width={thumbnail.size[0]}
     height={thumbnail.size[1]}
   />
