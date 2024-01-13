@@ -20,7 +20,7 @@ export default function Force() {
 
   const width = 1200;
   const height = width;
-  const color = scaleOrdinal(schemeYlGnBu[9].toReversed());
+  const color = scaleOrdinal(schemeYlGnBu[9].reverse());
   const k = width / 200;
   const r = randomUniform(k, k * 2);
   const n = 7;
