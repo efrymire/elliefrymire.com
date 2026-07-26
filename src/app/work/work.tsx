@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styles from './work.module.scss'
 import LinkWithArrow from '../ui/ui'
 import { useState } from 'react';
@@ -140,7 +139,7 @@ function ProjectTile({ data }: { data: Project }) {
 }
 
 export function Thumbnail({ alt, thumbnail } : { alt: string, thumbnail: Thumbnail}) {
-  return <Image
+  return <img
     className={`${styles.thumbnail} ${thumbnail.shadow && styles.shadow}`}
     src={thumbnail.src}
     alt={alt}

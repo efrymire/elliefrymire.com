@@ -1,6 +1,3 @@
-'use client'
-
-import Image from 'next/image'
 import Canvas from './blur/blur'
 import styles from './page.module.scss'
 import Resume from './resume/resume'
@@ -112,7 +109,7 @@ export default function Home() {
     </main>
     <nav className={styles.nav}>
       <span className={`${styles.previous} ${page === 'home' ? styles.hide : null}`}><a onClick={previous}>
-        <Image
+        <img
           src="/left-arrow.svg"
           alt='next'
           width={20}
@@ -121,7 +118,7 @@ export default function Home() {
         </a>
       </span>
       <span className={`${styles.next}  ${page === 'home' || page === "resume" ? styles.hide : null}`}><a onClick={next}>
-        <Image
+        <img
             src="/right-arrow.svg"
             alt='next'
             width={20}
