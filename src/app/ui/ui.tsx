@@ -1,11 +1,10 @@
-import Image from "next/image";
 import styles from './ui.module.scss';
 
 export default function LinkWithArrow({ children, href }: { children: any, href: string }) {
   return (
   <span className={styles.link}>
-    <a href={href} target='_blank'>{children} 
-    <Image
+    <a href={href} target='_blank'>{children}
+    <img
       className={styles.arrow}
       src="/arrow.svg"
       alt="arrow"
